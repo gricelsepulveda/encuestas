@@ -1,0 +1,62 @@
+@import "../../styles/common/mixins.scss";
+@import "../../styles/common/vars.scss";
+
+.ps-textarea{
+    width: auto;
+    height: 146px;
+    position: relative;
+    &:after{
+        content: '';
+        display: inline-block;
+        height: calc(136px);
+        width: calc(100%);
+        border: 3px solid rgba($white, 0.5);
+        position: absolute;
+        left: -3px;
+        top: -3px;
+        z-index: 0;
+        border-radius: 3px;
+    }
+    .ps-textarea-element{
+        box-sizing: border-box;
+        height: 136px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        border: 1px solid $border;
+        background-color: $white;
+        padding-left: 10px;
+        padding-right: 10px;
+        line-height: 36px;
+        border-radius: 3px;
+        color: $black;
+        font: {
+            family: "CircularStd", sans-serif;
+            size: 18px;
+            weight: 400;
+        }
+        &:focus{
+            outline: 0;
+            border: 1px solid $color-1;
+        }
+    }
+    &.error{
+        .ps-textarea-element{
+            border: 1px solid $color-3;
+            color: $color-2;
+        }
+    }
+    .ps-textarea-error{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        font: {
+            family: "CircularStd", sans-serif;
+            size: 10px;
+            weight: 300;
+        }
+        text-align: left;
+        color: $color-1;
+    }
+}

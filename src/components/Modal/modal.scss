@@ -1,0 +1,117 @@
+@import "../../styles/common/mixins.scss";
+@import "../../styles/common/vars.scss";
+
+#modal-root{
+    @include flex-col-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.ps-modal-bg{
+    background: rgba($black, 0.75);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.ps-modal{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    @include flex-col-center;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    .ps-modal-wrapper{
+        width: 75%;
+        height: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        box-sizing: border-box;
+        background-color: $white;
+        border-radius: 3px;
+        position: relative;
+        @include shadow;
+        @media #{$sm}{
+            height: 90vh;
+            overflow-y: hidden;
+        }
+        .ps-modal-close-button{
+            width: 36px;
+            height: 36px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            border: 0;
+            background: transparent;
+            outline: 0;
+            cursor: pointer;
+            @include flex-col-center;
+            &:focus{
+                outline: 0;
+            }
+            i {
+                color: $color-1;
+                font-size: 18px;
+                @media #{$sm}{
+                    font-size: 12px;
+                }
+            }
+            @media #{$sm}{
+                right: 0;
+                top: 0;
+            }
+        }
+        .ps-modal-title{
+            box-sizing: border-box;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            color: $color-2;
+            font: {
+                family: "CircularStd", sans-serif;
+                size: 32px;
+                weight: 500;
+            }
+            @media #{$sm}{
+                font-size: 18px;
+            }
+        }
+        .ps-modal-header{
+            @include zero-soft;
+            max-height: 200px;
+            box-sizing: border-box;
+            width: 100%;
+            height: 200px;
+            background: {
+                size: cover;
+                position: center;
+                repeat: no-repeat;
+            }
+            @media #{$sm}{
+                height: 100px;
+                max-height: 100px;
+            }
+        }
+        .ps-modal-description{
+            box-sizing: border-box;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            color: $black;
+            @media #{$sm}{
+                max-height: 60%;
+                overflow-y: scroll;
+            }
+            font: {
+                family: "Gilroy", sans-serif;
+                size: 16px;
+                weight: 300;
+            }
+        }
+    }
+}

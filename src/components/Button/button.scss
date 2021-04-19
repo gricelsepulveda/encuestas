@@ -1,0 +1,45 @@
+@import "../../styles/common/mixins.scss";
+@import "../../styles/common/vars.scss";
+
+.ps-button{
+   width: auto;
+   box-sizing: border-box;
+   height: 38px;
+   background-color: $color-2;
+   padding: 0px 1px 0px 1px;
+   border-radius: 3px;
+   position: relative;
+   @include flex-row-center;
+   @include shadow;
+   @include animate;
+   &.disabled{
+       opacity: 0.25;
+       pointer-events: none;
+       cursor: not-allowed;
+   }
+   .ps-button-btn{
+       @include flex-row-center;
+        border: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: calc(100% - 2px);
+        padding-left: 20px;
+        padding-right: 20px;
+        background: linear-gradient(135deg, $color-2 0%, rgba($color-1, 0.75) 90%);
+        font: {
+            size: 21px;
+            family: "CircularStd", sans-serif;
+        }
+        text: {
+            align: center;
+            transform: uppercase;
+        }
+        color: $white;
+        i {
+            display: inline-block;
+            font-size: 18px;
+            color: $white;
+            margin-right: 5px;
+        }
+   }
+}
