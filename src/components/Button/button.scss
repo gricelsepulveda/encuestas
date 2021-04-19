@@ -9,6 +9,7 @@
    padding: 0px 1px 0px 1px;
    border-radius: 3px;
    position: relative;
+   cursor: pointer;
    @include flex-row-center;
    @include shadow;
    @include animate;
@@ -18,7 +19,8 @@
        cursor: not-allowed;
    }
    .ps-button-btn{
-       @include flex-row-center;
+        cursor: pointer;
+        @include flex-row-center;
         border: 0;
         box-sizing: border-box;
         width: 100%;

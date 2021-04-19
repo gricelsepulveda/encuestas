@@ -1,0 +1,33 @@
+@import '../styles/common/vars.scss';
+@import '../styles/common/mixins.scss';
+
+body {
+    background-color: $black;
+    @include flex-col-center;
+}
+
+.hw-form-pool{
+    @include flex-col-center;
+    padding: 40px;
+    background-color: $white;
+    border-radius: 20px;
+    width: 600px;
+    height: auto;
+    .ps-button{
+        align-self: flex-end;
+        margin-top: 40px;
+    }
+    .hw-form-page{
+        @include flex-col-center;
+        display: none;
+        z-index: -1;
+        @include animate;
+        &.active{
+            display: flex;
+            z-index: 1;
+        }
+        p {
+            font-size: 24px;
+        }
+    }
+}
