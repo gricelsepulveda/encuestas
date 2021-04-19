@@ -14,7 +14,7 @@ body {
     background-color: $white;
     border-radius: 0px;
     width: 600px;
-    height: 400px;
+    height: auto;
     position: relative;
     @include shadow;
     @media #{$sm}{
@@ -138,6 +138,21 @@ body {
         }
         p {
             font-size: 28px;
+        }
+        .flex{
+            flex-wrap: wrap;
+            img {
+                height: 96px;
+            }
+        }
+        .img {
+            margin: 5px;
+            width: 96px;
+            height: 96px;
+            background: {
+                size: cover;
+                position: center;
+            }
         }
     }
 }

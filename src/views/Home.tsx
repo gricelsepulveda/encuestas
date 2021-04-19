@@ -49,14 +49,14 @@ const Home = () => {
     }
 
     const questions:string[] = [
-        'Tu edad',
-        'Tienes $10mil dólares a tu disposición. Los gastas:',
+        'Tu edad:',
+        'Tienes $5millones de pesos a tu disposición, los gastas:',
         '¿A qué te dedicas?',
         'Lo que más me quita el sueño es:',
-        '¿Cual es tu pelìcula/serie favorita y tu artista favorito?',
-        'Cuando bebes:',
-        'Uso frecuentemente',
-        'Para mi cumpleaños sería increíble si me regalaran:',
+        'Elige 1 artista y 1 pelicula',
+        'Cuando bebo alcohol:',
+        'Uso frecuentemente:',
+        'Para mi cumpleaños me gustaría recibir:',
         'Gracias por tu tiempo. Avisaremos el ganador por rrss y a tu correo'
     ]
 
@@ -119,84 +119,100 @@ const Home = () => {
                 break
             case 3:
                 render = 
-                    <div className='flex col start'>
-                        <div className='flex row center'>
-                            <input type="radio" id="poli" name="triggers" value="poli"/>
-                            <label>Política / Problemas sociales</label>
+                    <div className='flex row start' style={{width: '100%'}}>
+                        <div className="flex row center" style={{width: '50%'}}>
+                            <div className='flex col center'>
+                                <input type="radio" id="poli" name="triggers" value="poli"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/social.png")'}}/>
+                                <label  style={{width: '100%', textAlign: 'center'}}>Política / Problemas sociales</label>
+                            </div>
+                            <div className='flex col center'>
+                                <input type="radio" id="eco" name="triggers" value="eco"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/eco.png")'}}/>
+                                <label style={{width: '100%', textAlign: 'center'}}>El futuro del planeta y el medioambiente</label>
+                            </div>
                         </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="eco" name="triggers" value="eco"/>
-                            <label>El futuro del planeta y el medioambiente</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="jobmoney" name="triggers" value="jobmoney"/>
-                            <label>Mi futuro laboral y la estabilidad económica</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="healthy" name="triggers" value="healthy"/>
-                            <label>Mi salud  y bienestar</label>
+                        <div className="flex row center" style={{width: '50%'}}>
+                            <div className='flex col center'>
+                                <input type="radio" id="jobmoney" name="triggers" value="jobmoney"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/job.png")'}}/>
+                                <label  style={{width: '100%', textAlign: 'center'}}>Mi futuro laboral y la estabilidad económica</label>
+                            </div>
+                            <div className='flex col center'>
+                                <input type="radio" id="healthy" name="triggers" value="healthy"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/fit.png")'}}/>
+                                <label  style={{width: '100%', textAlign: 'center'}}>Mi salud  y bienestar</label>
+                            </div>
                         </div>
                     </div>
                 break
             case 4:
                 render = 
-                    <div className='flex row start'>
-                        <div className="flex row center">
+                    <div className='flex row start' style={{width: '100%'}}>
+                        <div className="flex row center" style={{width: '50%'}}>
                             <div className='flex row center'>
                                 <input type="radio" id="raggaeton" name="music" value="raggaeton"/>
-                                <label>Daddy Yankee</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/daddy.png")'}}/>
                             </div>
                             <div className='flex row center'>
                                 <input type="radio" id="romantic" name="music" value="romantic"/>
-                                <label>Luis Fonsi</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/fonsi.png")'}}/>
                             </div>
                             <div className='flex row center'>
                                 <input type="radio" id="rock" name="music" value="rock"/>
-                                <label>Pearl Jam</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/pearl.png")'}}/>
                             </div>
                             <div className='flex row center'>
                                 <input type="radio" id="electronic" name="music" value="electronic"/>
-                                <label>Armin Van Buuren</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/armin.png")'}}/>
                             </div>
                         </div>
-                        <div className="flex row center">
+                        <div className="flex row center" style={{width: '50%'}}>
                             <div className='flex row center'>
                                 <input type="radio" id="romantic" name="cinema" value="romantic"/>
-                                <label>Titanic</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/titanic.png")'}}/>
                             </div>
                             <div className='flex row center'>
                                 <input type="radio" id="action" name="cinema" value="action"/>
-                                <label>Kill Bill</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/killbill.png")'}}/>
                             </div>
                             <div className='flex row center'>
                                 <input type="radio" id="philophic" name="cinema" value="philophic"/>
-                                <label>Interstellar</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/inter.png")'}}/>
                             </div>
                             <div className='flex row center'>
                                 <input type="radio" id="arts" name="cinema" value="arts"/>
-                                <label>Tengo Miedo Torero</label>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/torero.png")'}}/>
                             </div>
                         </div>
                     </div>
                 break
             case 5:
                 render = 
-                    <div className='flex col start'>
-                        <div className='flex row center'>
-                            <input type="radio" id="joy" name="drinking" value="joy"/>
-                            <label>Hay que tomar hasta que amanezca</label>
+                    <div className='flex row start' style={{width: '100%'}}>
+                        <div className="flex row center" style={{width: '50%'}}>
+                            <div className='flex row center'>
+                                <input type="radio" id="joy" name="drinking" value="joy"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/ebrio.png")'}}/>
+                                <label style={{width: '100%', textAlign: 'center'}}>Hay que tomar hasta que amanezca</label>
+                            </div>
+                            <div className='flex row center'>
+                                <input type="radio" id="cibar" name="drinking" value="cibar"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/catar.png")'}}/>
+                                <label style={{width: '100%', textAlign: 'center'}}>Disfruto catar lo que estoy bebiendo</label>
+                            </div>
                         </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="cibar" name="drinking" value="cibar"/>
-                            <label>Disfruto catar lo que estoy bebiendo</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="selftlove" name="drinking" value="selftlove"/>
-                            <label>Es porque me merezco un momento de relax</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="social" name="drinking" value="social"/>
-                            <label>Es porque soy bebedor social</label>
+                        <div className="flex row center" style={{width: '50%'}}>
+                            <div className='flex row center'>
+                                <input type="radio" id="selftlove" name="drinking" value="selftlove"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/vino.png")'}}/>
+                                <label style={{width: '100%', textAlign: 'center'}}>Es porque me merezco un momento de relax</label>
+                            </div>
+                            <div className='flex row center'>
+                                <input type="radio" id="social" name="drinking" value="social"/>
+                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/social2.png")'}}/>
+                                <label style={{width: '100%', textAlign: 'center'}}>Es porque soy bebedor social</label>
+                            </div>
                         </div>
                     </div>
                 break
