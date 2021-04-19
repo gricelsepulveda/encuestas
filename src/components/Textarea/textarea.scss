@@ -2,9 +2,10 @@
 @import "../../styles/common/vars.scss";
 
 .ps-textarea{
-    width: auto;
+    width: 100%;
     height: 146px;
     position: relative;
+    cursor: text;
     &:after{
         content: '';
         display: inline-block;
@@ -43,7 +44,7 @@
     }
     &.error{
         .ps-textarea-element{
-            border: 1px solid $color-3;
+            border: 1px solid $color-1;
             color: $color-2;
         }
     }
