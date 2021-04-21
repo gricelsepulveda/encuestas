@@ -18,7 +18,10 @@ body {
     position: relative;
     @include shadow;
     @media #{$sm}{
-
+        width: 90vw;
+        padding: 20px;
+        padding-bottom: 30px;
+        margin-top: 48px;
     }
     h1 {
         text-transform: uppercase;
@@ -52,6 +55,11 @@ body {
         justify-content: space-between;
         align-content: center;
         align-items: center;
+        @media #{$sm}{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
     }
     .ps-button{
         align-self: flex-end;
@@ -86,47 +94,52 @@ body {
         }
         &.page-1{
             &:after{
-                width: calc((100% / 8) * 0);
+                width: calc((100% / 9) * 0);
             }
         }
         &.page-2{
             &:after{
-                width: calc((100% / 8) * 1);
+                width: calc((100% / 9) * 1);
             }
         }
         &.page-3{
             &:after{
-                width: calc((100% / 8) * 2);
+                width: calc((100% / 9) * 2);
             }
         }
         &.page-4{
             &:after{
-                width: calc((100% / 8) * 3);
+                width: calc((100% / 9) * 3);
             }
         }
         &.page-5{
             &:after{
-                width: calc((100% / 8) * 4);
+                width: calc((100% / 9) * 4);
             }
         }
         &.page-6{
             &:after{
-                width: calc((100% / 8) * 5);
+                width: calc((100% / 9) * 5);
             }
         }
         &.page-7{
             &:after{
-                width: calc((100% / 8) * 6);
+                width: calc((100% / 9) * 6);
             }
         }
         &.page-8{
             &:after{
-                width: calc((100% / 8) * 7);
+                width: calc((100% / 9) * 7);
             }
         }
         &.page-9{
             &:after{
-                width: calc((100% / 8) * 8);
+                width: calc((100% / 9) * 8);
+            }
+        }
+        &.page-10{
+            &:after{
+                width: calc((100% / 9) * 9);
             }
         }
         &.active{
@@ -138,6 +151,9 @@ body {
         }
         p {
             font-size: 28px;
+            @media #{$sm}{
+                font-size: 18px
+            }
         }
         .flex{
             flex-wrap: wrap;
@@ -153,6 +169,45 @@ body {
                 size: cover;
                 position: center;
             }
+            @media #{$sm}{
+                height: 64px;
+                width: 64px;
+            }
         }
+    }
+}
+
+input[type='radio'], input[type='checkbox']{
+    height: 28px;
+    width: 28px;
+    color: $color-1;
+    @media #{$sm}{
+        height: 21px;
+        width: 21px;
+    }
+}
+
+.prevent-errors{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: $color-2;
+    color: white;
+    position: absolute;
+    bottom: 55px;
+    left: 0px;
+    font-size: 14px;
+    font-weight: 600;
+    @media #{$sm}{
+        bottom: 0px;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+label {
+    text-align: left;
+    @media #{$sm}{
+        font-size: 13px
     }
 }

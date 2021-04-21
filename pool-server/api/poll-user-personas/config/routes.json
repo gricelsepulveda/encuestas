@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/poll-user-personas",
+      "handler": "poll-user-personas.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/poll-user-personas/count",
+      "handler": "poll-user-personas.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/poll-user-personas/:id",
+      "handler": "poll-user-personas.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/poll-user-personas",
+      "handler": "poll-user-personas.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/poll-user-personas/:id",
+      "handler": "poll-user-personas.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/poll-user-personas/:id",
+      "handler": "poll-user-personas.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

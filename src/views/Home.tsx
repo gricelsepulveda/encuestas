@@ -1,302 +1,152 @@
-//IMPORTS
-import React, { useState } from "react"
+//Modules
+import React, { useEffect, useState, useRef } from 'react'
 //Components
-import Button from "../components/Button/Button"
-import Textarea from "../components/Textarea/Textarea"
-import Question from "./Question"
+import Button from '../components/Button/Button'
+//Types
+import { Answer, OptionsData } from '../types/types'
+//Data
+import { defaultAnswers, pollData } from '../data/data'
 //Styles
-import "../styles/home.scss"
-
-type Answer = {
-    id: number,
-    answer: string | undefined,
-    validate: boolean
-}
+import '../styles/home.scss'
 
 const Home = () => {
-    const maxPage:number = 9
-    const [page, setPage] = useState<number | null>(1)
-    const [data, setData] = useState<Answer[] | null>([
-        {
-            id:1,
-            answer:undefined,
-            validate: false
-        }
-    ])
+    const [formElements] = useState<OptionsData[]>(pollData)
+    const [page, setPage] = useState<number>(1)
+    const [data, setData] = useState<Answer[]>(defaultAnswers)
+    const element = useRef<null | any>(null)
 
     const checkAnswer = () => {
-        const currentPage:number = page != null ? page + 1 : 1
-        let checker:boolean = true 
-        if (data != null) {
-            if ( data[currentPage - 1] != undefined ) {
-                checker = data[currentPage - 1].validate
-            }
-            else {
-                checker = true
-            }
-        }
+        const currentPage:number = page
+        let checker:boolean = false
+        data[currentPage - 1] != undefined ? checker = data[currentPage - 1].validate : checker = false
         return checker
     }
 
     const handlePage = () => {
-        const nextPage:number = page != null ? page + 1 : 1
-        if (nextPage <= maxPage ){
+        const nextPage:number = page + 1
+        const maxPage:number = formElements.length
+        if (nextPage <= maxPage){
             setPage(nextPage)
-        }
-        else {
-            location.replace("https://www.hellowine.cl");
+        } else {
+            sendAnswers()
+            location.replace('https://www.hellowine.cl')
         }
     }
 
-    const questions:string[] = [
-        'Tu edad:',
-        'Tienes $5millones de pesos a tu disposición, los gastas:',
-        '¿A qué te dedicas?',
-        'Lo que más me quita el sueño es:',
-        'Elige 1 artista y 1 pelicula',
-        'Cuando bebo alcohol:',
-        'Uso frecuentemente:',
-        'Para mi cumpleaños me gustaría recibir:',
-        'Gracias por tu tiempo. Avisaremos el ganador por rrss y a tu correo'
-    ]
+    const recordAnswer = (oldData:Answer[], newData:Answer, idIndex:number) => {
+        let updatedData:Answer[] = [... oldData.filter(oldD => oldD.id != idIndex)]
+        updatedData.push(newData)
+        updatedData = updatedData.sort(function(a, b){return a.id - b.id});
+        return updatedData
+    }
+
+    const handleChange = (idQ: number, name:string, value:string, type: string) => {
+        let elVal = element.current != null ? element.current.value : ''
+        let val:Answer
+        const setVals = () => {
+            let checkExists = data[idQ - 1].answer.filter(x => x == value) 
+            let result:any[] = idQ != 8 ? [name, type != 'textarea' ? value : elVal] : checkExists.length > 0 ? data[idQ - 1].answer.filter(x => x != value) : [...data[idQ - 1].answer, value]
+            return result
+        }
+        val = {
+            id: idQ,
+            answer: setVals(),
+            validate: (type != 'textarea' ? value : elVal).length > 0 ? true : false
+        }
+        setData(recordAnswer(data, val, idQ))
+    }
+
+    const renderFormElement = (control:string, info:OptionsData, index: number) => {
+        let toRender:React.ReactFragment
+        const prefix = info.options[index]
+        control != 'textarea' ? toRender = ( <div className='flex row start' style={{width: '100%'}}  key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`}>
+                            <input 
+                                type={prefix.type} name={prefix.name} id={`${prefix.id}`} value={prefix.value} placeholder={prefix.placeholder} disabled={prefix.disabled}
+                                onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>
+                            { prefix.img != '' ? <div className='img' style={{backgroundImage: `url("${prefix.img}")`}}/> : null } {prefix.label != '' ? <label>{prefix.label}</label> : null }</div>)
+        : toRender = ( <textarea rows={5} style={{width: '100%'}}  ref={element} key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`} name={prefix.name} id={`${prefix.id}`} placeholder={prefix.placeholder} disabled={prefix.disabled} onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>)
+        return toRender
+    }
 
     const renderQuestion  = (ind: number) => {
-        let render:any
+        let render:any[] = [<p>{formElements[ind].question}</p>]
+
         switch (ind) {
-            case 0:
-                render = 
-                    <div className='flex col start'>
-                        <div className='flex row center'>
-                            <input type="radio" id="25" name="age" value="25"/>
-                            <label>25 años o menos</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="26" name="age" value="26"/>
-                            <label>entre 26 y 35 años</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="36" name="age" value="36"/>
-                            <label>entre 36 y 45 años</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="46" name="age" value="46"/>
-                            <label>46 años o más.</label>
-                        </div>
-                    </div>
+            case 0: case 1: case 2: case 7: case 8:
+                render.push (
+                    <div className='flex col start' style={{width: '100%'}}  key={`wrapper-a-${ind}-${formElements[ind].question.split(' ').join()}`}>
+                        {
+                            formElements[ind].options.map((formEl, index) => ind == 2 || ind == 7 ? 
+                                <div className="flex row center" style={{width: '100%'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>{ renderFormElement(formEl.type, formElements[ind], index) }</div> 
+                                : renderFormElement(formEl.type, formElements[ind], index))
+                        }
+                    </div>)
                 break
-            case 1:
-                render = 
-                    <div className='flex col start'>
-                        <div className='flex row center'>
-                            <input type="radio" id="emo" name="money" value="emo"/>
-                            <label>Con mis seres queridos</label>
+            case 3: case 4: case 5: case 6:
+                render.push (
+                    <div className='flex row start' style={{width: '100%'}} key={`wrapper-b-${ind}-${formElements[ind].question.split(' ').join()}`}>
+                        <div className='flex row center' style={{width: '50%'}}>
+                            {
+                                formElements[ind].options.map((formEl, index) => index < 2  ? 
+                                    <div className='flex col center' style={{margin: '10px'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>
+                                        { renderFormElement(formEl.type, formElements[ind], index)}
+                                    </div> : '')
+                            }
                         </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="debt" name="money" value="debt"/>
-                            <label>Primero dejo mis deudas resueltas</label>
+                        <div className='flex row center' style={{width: '50%'}} key={`wrapper-c-${ind}-${formElements[ind].question.split(' ').join()}`}>
+                            {
+                                formElements[ind].options.map((formEl, index) => index >= 2 ? 
+                                    <div className='flex col center' key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>
+                                        { renderFormElement(formEl.type, formElements[ind], index) }
+                                    </div> : '')
+                            }
                         </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="inv" name="money" value="inv"/>
-                            <label>Invierto para que crezcan</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="radio" id="wish" name="money" value="wish"/>
-                            <label>Compro todo eso que tengo en mi lista de deseos</label>
-                        </div>
-                    </div>
-                break
-            case 2:
-                render = 
-                    <Textarea
-                        name= 'dedicacion'
-                        placeholder=''
-                        disabled= {false}
-                        TextError= 'No se puede dejar vacío'
-                        error= {false}
-                        value= ''
-                        onChange={() => null}
-                    />
-                break
-            case 3:
-                render = 
-                    <div className='flex row start' style={{width: '100%'}}>
-                        <div className="flex row center" style={{width: '50%'}}>
-                            <div className='flex col center'>
-                                <input type="radio" id="poli" name="triggers" value="poli"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/social.png")'}}/>
-                                <label  style={{width: '100%', textAlign: 'center'}}>Política / Problemas sociales</label>
-                            </div>
-                            <div className='flex col center'>
-                                <input type="radio" id="eco" name="triggers" value="eco"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/eco.png")'}}/>
-                                <label style={{width: '100%', textAlign: 'center'}}>El futuro del planeta y el medioambiente</label>
-                            </div>
-                        </div>
-                        <div className="flex row center" style={{width: '50%'}}>
-                            <div className='flex col center'>
-                                <input type="radio" id="jobmoney" name="triggers" value="jobmoney"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/job.png")'}}/>
-                                <label  style={{width: '100%', textAlign: 'center'}}>Mi futuro laboral y la estabilidad económica</label>
-                            </div>
-                            <div className='flex col center'>
-                                <input type="radio" id="healthy" name="triggers" value="healthy"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/fit.png")'}}/>
-                                <label  style={{width: '100%', textAlign: 'center'}}>Mi salud  y bienestar</label>
-                            </div>
-                        </div>
-                    </div>
-                break
-            case 4:
-                render = 
-                    <div className='flex row start' style={{width: '100%'}}>
-                        <div className="flex row center" style={{width: '50%'}}>
-                            <div className='flex row center'>
-                                <input type="radio" id="raggaeton" name="music" value="raggaeton"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/daddy.png")'}}/>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="romantic" name="music" value="romantic"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/fonsi.png")'}}/>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="rock" name="music" value="rock"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/pearl.png")'}}/>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="electronic" name="music" value="electronic"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/armin.png")'}}/>
-                            </div>
-                        </div>
-                        <div className="flex row center" style={{width: '50%'}}>
-                            <div className='flex row center'>
-                                <input type="radio" id="romantic" name="cinema" value="romantic"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/titanic.png")'}}/>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="action" name="cinema" value="action"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/killbill.png")'}}/>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="philophic" name="cinema" value="philophic"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/inter.png")'}}/>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="arts" name="cinema" value="arts"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/torero.png")'}}/>
-                            </div>
-                        </div>
-                    </div>
-                break
-            case 5:
-                render = 
-                    <div className='flex row start' style={{width: '100%'}}>
-                        <div className="flex row center" style={{width: '50%'}}>
-                            <div className='flex row center'>
-                                <input type="radio" id="joy" name="drinking" value="joy"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/ebrio.png")'}}/>
-                                <label style={{width: '100%', textAlign: 'center'}}>Hay que tomar hasta que amanezca</label>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="cibar" name="drinking" value="cibar"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/catar.png")'}}/>
-                                <label style={{width: '100%', textAlign: 'center'}}>Disfruto catar lo que estoy bebiendo</label>
-                            </div>
-                        </div>
-                        <div className="flex row center" style={{width: '50%'}}>
-                            <div className='flex row center'>
-                                <input type="radio" id="selftlove" name="drinking" value="selftlove"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/vino.png")'}}/>
-                                <label style={{width: '100%', textAlign: 'center'}}>Es porque me merezco un momento de relax</label>
-                            </div>
-                            <div className='flex row center'>
-                                <input type="radio" id="social" name="drinking" value="social"/>
-                                <div className="img" style={{backgroundImage: 'url("https://gricel.sfo2.digitaloceanspaces.com/hellowine/social2.png")'}}/>
-                                <label style={{width: '100%', textAlign: 'center'}}>Es porque soy bebedor social</label>
-                            </div>
-                        </div>
-                    </div>
-                break
-            case 6:
-                render = 
-                    <div className='flex col start'>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="fb" name="webapps" value="fb"/>
-                            <label>Facebook</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="tw" name="webapps" value="tw"/>
-                            <label>Twitter</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="ig" name="webapps" value="ig"/>
-                            <label>Instagram</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="tt" name="webapps" value="tt"/>
-                            <label>TikTok</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="yt" name="webapps" value="yt"/>
-                            <label>YouTube</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="ml" name="webapps" value="ml"/>
-                            <label>Mercado Libre</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="aea" name="webapps" value="aea"/>
-                            <label>Amazon, Ebay, Aliexpress, etc.</label>
-                        </div>
-                        <div className='flex row center'>
-                            <input type="checkbox" id="to" name="webapps" value="to"/>
-                            <label>Tiendas online</label>
-                        </div>
-                    </div>
-                break
-            case 7:
-                render = 
-                    <Textarea
-                        name= 'cumpleaños'
-                        placeholder=''
-                        disabled= {false}
-                        TextError= 'No se puede dejar vacío'
-                        error= {false}
-                        value= ''
-                        onChange={() => null}
-                    />
-                break
-            case 8:
-                render = 
-                    <>
-                    </>
+                    </div>)
                 break
         }
         return render
     }
 
+    const sendAnswers = () => {
+        fetch('http://localhost:1337/poll-user-personas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                answer: data
+            }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+    }
+
+    useEffect(() => {
+    }, [data])
+
     return (
-        <div className="hw-form-pool">
-            <div className="hw-header">
-                <h1 className="flex row center">
-                    <img src="https://hellowine.cl/assets/logo_HW-26fe59ee74129b0e64b542bfc84cbf57984d73f5b819c88d4c8ecf675f339e84.svg" alt="logo hellowine"/>
+        <div className='hw-form-pool'>
+            <div className='hw-header'>
+                <h1 className='flex row center'>
+                    <img src='https://hellowine.cl/assets/logo_HW-26fe59ee74129b0e64b542bfc84cbf57984d73f5b819c88d4c8ecf675f339e84.svg' alt='logo hellowine'/>
                     Encuesta
                 </h1>
-                {
-                    page != null ? page < 9 ?
-                    <h2>Pregunta <span>{page}</span> de 8</h2> : null : null
-                }
+                {page < formElements.length ? <h2><span>{page}</span> de {formElements.length  - 1}</h2> : null }
             </div>
             {
-                questions.map((item, index) => 
-                    <Question
-                        activePage={page != null ? page : index + 1} page={index + 1} id={index + 1} validate={false} key={`item-${index}`}
-                        question={item} 
-                        body={renderQuestion(index)}
-                    />
+                formElements.map((item, index) => 
+                page == index + 1 ?
+                    <div className={`hw-form-page page-${page} ${page == index + 1 ? 'active' : ''}`} key={`${item.question.split(' ').join()}-${index}`}>
+                        { 
+                            renderQuestion(index).map((elementHtml, indElement) => 
+                                <div className="hw-form-element" key={`hw-form-element-${item.question.split(' ').join()}-${index}-${indElement}`}>{elementHtml}</div>
+                            ) 
+                        }
+                    </div> : null
                 )
             }
-
-            <Button icon="" disabled={!checkAnswer()} name="edad" value={`${page == 9 ? 'finalizar' : 'siguiente'}`} color="color-2" action={handlePage}/>
+            <span className='prevent-errors'>{page < formElements.length ? data[page - 1].validate ? '' : formElements[page - 1].errorMessage : ''}</span>
+            <Button icon='' disabled={page < formElements.length ? !checkAnswer() : false} name='edad' value={`${page == formElements.length ? 'finalizar' : 'siguiente'}`} color='color-2' action={handlePage}/>
         </div>
     )
 }

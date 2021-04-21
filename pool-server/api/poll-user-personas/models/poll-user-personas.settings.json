@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "poll_user_personas",
+  "info": {
+    "name": "Poll user personas"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "answer": {
+      "type": "json"
+    }
+  }
+}
