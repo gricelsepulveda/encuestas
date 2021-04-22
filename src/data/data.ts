@@ -23,7 +23,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Tengo $5millones de pesos a tu disposición, los gasto:', error:false, errorMessage:'Debes eligir una:',
+        question:'Tengo $5millones de pesos a mi disposición, los gasto:', error:false, errorMessage:'Debes eligir una:',
         options: [
             { type:'radio', name:'money', id:2, disabled:false, placeholder:'', value:'emotional', img:'', label:'Con mis seres queridos' },
             { type:'radio', name:'money', id:2, disabled:false, placeholder:'', value:'debts', img:'', label:'Primero dejo mis deudas resueltas' },
