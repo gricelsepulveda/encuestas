@@ -94,52 +94,57 @@ body {
         }
         &.page-1{
             &:after{
-                width: calc((100% / 9) * 0);
+                width: calc((100% / 10) * 0);
             }
         }
         &.page-2{
             &:after{
-                width: calc((100% / 9) * 1);
+                width: calc((100% / 10) * 1);
             }
         }
         &.page-3{
             &:after{
-                width: calc((100% / 9) * 2);
+                width: calc((100% / 10) * 2);
             }
         }
         &.page-4{
             &:after{
-                width: calc((100% / 9) * 3);
+                width: calc((100% / 10) * 3);
             }
         }
         &.page-5{
             &:after{
-                width: calc((100% / 9) * 4);
+                width: calc((100% / 10) * 4);
             }
         }
         &.page-6{
             &:after{
-                width: calc((100% / 9) * 5);
+                width: calc((100% / 10) * 5);
             }
         }
         &.page-7{
             &:after{
-                width: calc((100% / 9) * 6);
+                width: calc((100% / 10) * 6);
             }
         }
         &.page-8{
             &:after{
-                width: calc((100% / 9) * 7);
+                width: calc((100% / 10) * 7);
             }
         }
         &.page-9{
             &:after{
-                width: calc((100% / 9) * 8);
+                width: calc((100% / 10) * 8);
+            }
+        }
+        &.page-11{
+            &:after{
+                width: calc((100% / 10) * 9);
             }
         }
         &.page-10{
             &:after{
-                width: calc((100% / 9) * 9);
+                width: calc((100% / 10) * 10);
             }
         }
         &.active{
@@ -150,6 +155,7 @@ body {
             width: 100%;
         }
         p {
+            margin-bottom: 10px;
             font-size: 28px;
             @media #{$sm}{
                 font-size: 18px
@@ -189,6 +195,7 @@ input[type='radio'], input[type='checkbox']{
 
 textarea {
     font-size: 18px;
+    padding: 10px;
 }
 
 .prevent-errors{
@@ -196,13 +203,11 @@ textarea {
     padding-right: 20px;
     background-color: $color-2;
     color: white;
-    position: absolute;
-    bottom: 55px;
-    left: 0px;
     font-size: 14px;
     font-weight: 600;
+    margin-bottom: 20px;
+    display: inline-block;
     @media #{$sm}{
-        bottom: 0px;
         width: 100%;
         padding-left: 10px;
         padding-right: 10px;
@@ -210,8 +215,41 @@ textarea {
 }
 
 label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: left;
+    height: 54px;
     @media #{$sm}{
         font-size: 13px
     }
+}
+
+.page-5, .page-6{
+    .flex.row.start{
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
+        .flex.row.center{
+            .flex.col.center{
+                width: 100%;
+                .flex.row.start{
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    align-content: center;
+                    label {
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.page-8{ 
+    label{
+        height: 36px;
+    } 
 }

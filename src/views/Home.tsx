@@ -63,16 +63,17 @@ const Home = () => {
         let toRender:React.ReactFragment
         const prefix = info.options[index]
         control != 'textarea' ? toRender = ( <div className='flex row start' style={{width: '100%'}}  key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`}>
+                            { prefix.img != '' ? <div className='img' style={{backgroundImage: `url("${prefix.img}")`}}/> : null }
                             <input 
                                 type={prefix.type} name={prefix.name} id={`${prefix.id}`} value={prefix.value} placeholder={prefix.placeholder} disabled={prefix.disabled}
                                 onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>
-                            { prefix.img != '' ? <div className='img' style={{backgroundImage: `url("${prefix.img}")`}}/> : null } {prefix.label != '' ? <label>{prefix.label}</label> : null }</div>)
-        : toRender = ( <textarea rows={5} style={{width: '100%'}}  ref={element} key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`} name={prefix.name} id={`${prefix.id}`} placeholder={prefix.placeholder} disabled={prefix.disabled} onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>)
+                            {prefix.label != '' ? <label>{prefix.label}</label> : null }</div>)
+        : toRender = ( <textarea rows={4} style={{width: '100%'}}  ref={element} key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`} name={prefix.name} id={`${prefix.id}`} placeholder={prefix.placeholder} disabled={prefix.disabled} onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>)
         return toRender
     }
 
     const renderQuestion  = (ind: number) => {
-        let render:any[] = [<p>{formElements[ind].question}</p>]
+        let render:any[] = [<p>{formElements[ind].question}</p>,<span className='prevent-errors'>{page < formElements.length ? data[page - 1].validate ? '' : formElements[page - 1].errorMessage : ''}</span>]
 
         switch (ind) {
             case 0: case 1: case 2: case 7: case 8: case 9:
@@ -99,7 +100,7 @@ const Home = () => {
                         <div className='flex row center' style={{width: '50%'}} key={`wrapper-c-${ind}-${formElements[ind].question.split(' ').join()}`}>
                             {
                                 formElements[ind].options.map((formEl, index) => index >= 2 ? 
-                                    <div className='flex col center' key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>
+                                    <div className='flex col center' style={{margin: '10px'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>
                                         { renderFormElement(formEl.type, formElements[ind], index) }
                                     </div> : '')
                             }
@@ -150,7 +151,6 @@ const Home = () => {
                     </div> : null
                 )
             }
-            <span className='prevent-errors'>{page < formElements.length ? data[page - 1].validate ? '' : formElements[page - 1].errorMessage : ''}</span>
             <Button icon='' disabled={page < formElements.length ? !checkAnswer() : false} name='edad' value={`${page == formElements.length ? 'finalizar' : 'siguiente'}`} color='color-2' action={handlePage}/>
         </div>
     )
