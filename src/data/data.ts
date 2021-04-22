@@ -33,12 +33,12 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Tengo $5millones de pesos a mi disposición, los gasto:', error:false, errorMessage:'Debes eligir una:',
+        question:'Tengo $5 millones de pesos a mi disposición, los destino:', error:false, errorMessage:'Debes eligir una:',
         options: [
-            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'emotional', img:'', label:'Con mis seres queridos' },
-            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'debts', img:'', label:'Primero dejo mis deudas resueltas' },
-            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'inversions', img:'', label:'Invierto para que crezcan' },
-            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'wishlist', img:'', label:'Compro toda mi lista de deseos' },
+            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'emotional', img:'', label:'Para gastarlos con mis seres queridos' },
+            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'debts', img:'', label:'Para dejar mis deudas resueltas' },
+            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'inversions', img:'', label:'Para invertirlos y que crezcan' },
+            { type:'radio', name:'money', id:3, disabled:false, placeholder:'', value:'wishlist', img:'', label:'Para comprar toda mi lista de deseos' },
         ]
     },
     {
@@ -50,28 +50,28 @@ export const pollData:OptionsData[] = [
     {
         question:'Lo que más me quita el sueño es:', error:false, errorMessage:'Debes eligir una',
         options: [
-            { type:'radio', name:'triggers', id:5, disabled:false, placeholder:'', value:'socialAndPolitics', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/social.png', label:'Política / Problemas sociales' },
+            { type:'radio', name:'triggers', id:5, disabled:false, placeholder:'', value:'socialAndPolitics', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/social.png', label:'La política y los problemas sociales' },
             { type:'radio', name:'triggers', id:5, disabled:false, placeholder:'', value:'eco', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/eco.png', label:'El futuro del planeta y el medioambiente' },
             { type:'radio', name:'triggers', id:5, disabled:false, placeholder:'', value:'future', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/job.png', label:'Mi futuro laboral y la estabilidad económica' },
             { type:'radio', name:'triggers', id:5, disabled:false, placeholder:'', value:'health', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/fit.png', label:'Mi salud  y bienestar' },
         ]
     },
     {
-        question:'Cuando escucho musica prefiero...', error:false, errorMessage:'Debes eligir una',
+        question:'Cuando escucho música prefiero:', error:false, errorMessage:'Debes eligir una',
         options: [
-            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'raggaeton', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/daddy.png', label:'Raggaeton/Urbano' },
-            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'romantic', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/fonsi.png', label:'Romántica' },
-            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'rock', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/pearl.png', label:'Rock' },
-            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'electronic', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/armin.png', label:'Electrónica' },
+            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'raggaeton', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/daddy.png', label:'Raggaeton y/o música urbana' },
+            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'romantic', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/fonsi.png', label:'Música romántica' },
+            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'rock', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/pearl.png', label:'Música rockera' },
+            { type:'radio', name:'music', id:6, disabled:false, placeholder:'', value:'electronic', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/armin.png', label:'Música electrónica' },
         ]
     },
     {
-        question:'Cuando tengo que ver una película prefiero...', error:false, errorMessage:'Debes eligir una',
+        question:'Cuando tengo que ver una película prefiero películas:', error:false, errorMessage:'Debes eligir una',
         options: [
-            { type:'radio', name:'movies', id:7, disabled:false, placeholder:'', value:'romance', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/titanic.png', label:'Romance' },
+            { type:'radio', name:'movies', id:7, disabled:false, placeholder:'', value:'romance', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/titanic.png', label:'Románticas' },
             { type:'radio', name:'movies', id:7, disabled:false, placeholder:'', value:'action', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/killbill.png', label:'De acción' },
             { type:'radio', name:'movies', id:7, disabled:false, placeholder:'', value:'philosophic', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/inter.png', label:'Para pensar' },
-            { type:'radio', name:'movies', id:7, disabled:false, placeholder:'', value:'arts', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/torero.png', label:'Cine Arte' },
+            { type:'radio', name:'movies', id:7, disabled:false, placeholder:'', value:'arts', img:'https://gricel.sfo2.digitaloceanspaces.com/hellowine/torero.png', label:'De cine arte' },
         ]
     },
     {
@@ -84,7 +84,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Uso frecuentemente:', error:false, errorMessage:'Elige al menos una:',
+        question:'Uso frecuentemente:', error:false, errorMessage:'(Puedes elegir más de una)',
         options: [
             { type:'checkbox', name:'webapps', id:9, disabled:false, placeholder:'', value:'fb', img:'', label:'Facebook' },
             { type:'checkbox', name:'webapps', id:9, disabled:false, placeholder:'', value:'tw', img:'', label:'Twitter' },
@@ -97,19 +97,19 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Para mi cumpleaños me gustaría recibir:', error:false, errorMessage:'Describe tu regalo soñado:',
+        question:'Para mi cumpleaños me gustaría recibir:', error:false, errorMessage:'(Lo primero que se te viene a la cabeza)',
         options: [
             { type:'textarea', name:'birthdaygift', id:10, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]
     },
     {
-        question:'Mi correo para entrar al sorteo:', error:false, errorMessage:'Sin tu correo no te podemos agregar al sorteo',
+        question:' Déjanos tu correo para contactarte en caso de que seas el/la ganador/a:', error:false, errorMessage:'(Sin tu correo no te podemos incluir)',
         options: [
             { type:'textarea', name:'email', id:11, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]
     },
     {
-        question:'¡Muchas gracias por tu tiempo! Pronto daremos a conocer al ganador de los vinitos, ¡atentos al correo!', error:false, errorMessage:'',
+        question:'¡Muchas gracias por tu tiempo! Pronto daremos a conocer al ganador de los vinitos. ¡Atento a tu correo!', error:false, errorMessage:'',
         options: [
             { type:'none', name:'', id:12, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]

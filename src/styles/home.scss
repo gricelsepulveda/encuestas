@@ -63,7 +63,7 @@ body {
     }
     .ps-button{
         align-self: flex-end;
-        margin-top: 40px;
+        margin-top: 30px;
     }
     .hw-form-page{
         @include flex-col-center;
@@ -94,57 +94,62 @@ body {
         }
         &.page-1{
             &:after{
-                width: calc((100% / 10) * 0);
+                width: calc(10% * 0);
             }
         }
         &.page-2{
             &:after{
-                width: calc((100% / 10) * 1);
+                width: calc(10% * 1);
             }
         }
         &.page-3{
             &:after{
-                width: calc((100% / 10) * 2);
+                width: calc(10% * 2);
             }
         }
         &.page-4{
             &:after{
-                width: calc((100% / 10) * 3);
+                width: calc(10% * 3);
             }
         }
         &.page-5{
             &:after{
-                width: calc((100% / 10) * 4);
+                width: calc(10% * 4);
             }
         }
         &.page-6{
             &:after{
-                width: calc((100% / 10) * 5);
+                width: calc(10% * 5);
             }
         }
         &.page-7{
             &:after{
-                width: calc((100% / 10) * 6);
+                width: calc(10% * 6);
             }
         }
         &.page-8{
             &:after{
-                width: calc((100% / 10) * 7);
+                width: calc(10% * 7);
             }
         }
         &.page-9{
             &:after{
-                width: calc((100% / 10) * 8);
-            }
-        }
-        &.page-11{
-            &:after{
-                width: calc((100% / 10) * 9);
+                width: calc(10% * 8);
             }
         }
         &.page-10{
             &:after{
-                width: calc((100% / 10) * 10);
+                width: calc(10% * 9);
+            }
+        }
+        &.page-11{
+            &:after{
+                width: calc(10% * 9.5);
+            }
+        }
+        &.page-12{
+            &:after{
+                width: 100%;
             }
         }
         &.active{
@@ -241,6 +246,9 @@ label {
                     align-content: center;
                     label {
                         height: auto;
+                        @media #{$sm}{
+                            height: 36px;
+                        }
                     }
                 }
             }
@@ -248,7 +256,7 @@ label {
     }
 }
 
-.page-8{ 
+.page-9{ 
     label{
         height: 36px;
     } 
