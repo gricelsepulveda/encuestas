@@ -26,6 +26,7 @@ const Home = () => {
         const nextPage:number = page + 1
         const maxPage:number = formElements.length
         if (page == 10){
+            console.log('intentando enviar rsptas')
             sendAnswers() 
         }
         if (nextPage <= maxPage){
@@ -110,6 +111,7 @@ const Home = () => {
     }
 
     const sendAnswers = () => {
+        console.log('pase por fetch')
         fetch('https://encuesta.hellowine.cl:1337/poll-user-personas', {
             method: 'POST',
             headers: {
