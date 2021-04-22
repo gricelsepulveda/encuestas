@@ -108,7 +108,7 @@ const Home = () => {
     }
 
     const sendAnswers = () => {
-        fetch('https://encuesta.hellowine.cl:1337/poll-user-personas', {
+        fetch('https://localhost.cl:1337/poll-user-personas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -119,6 +119,7 @@ const Home = () => {
         })
         .then(response => response.json())
         .then(data => console.log(data));
+
     }
 
     useEffect(() => {
