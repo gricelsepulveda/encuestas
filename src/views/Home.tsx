@@ -25,8 +25,7 @@ const Home = () => {
     const handlePage = () => {
         const nextPage:number = page + 1
         const maxPage:number = formElements.length
-        if (page == 10){
-            console.log('intentando enviar rsptas')
+        if (page == 11){
             sendAnswers() 
         }
         if (nextPage <= maxPage){
@@ -76,17 +75,17 @@ const Home = () => {
         let render:any[] = [<p>{formElements[ind].question}</p>,<span className='prevent-errors'>{page < formElements.length ? data[page - 1].validate ? '' : formElements[page - 1].errorMessage : ''}</span>]
 
         switch (ind) {
-            case 0: case 1: case 2: case 7: case 8: case 9:
+            case 0: case 1: case 2: case 3: case 8: case 9: case 10:
                 render.push (
                     <div className='flex col start' style={{width: '100%'}}  key={`wrapper-a-${ind}-${formElements[ind].question.split(' ').join()}`}>
                         {
-                            formElements[ind].options.map((formEl, index) => ind == 2 || ind == 7 ? 
+                            formElements[ind].options.map((formEl, index) => ind == 3 || ind == 8 ? 
                                 <div className="flex row center" style={{width: '100%'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>{ renderFormElement(formEl.type, formElements[ind], index) }</div> 
                                 : renderFormElement(formEl.type, formElements[ind], index))
                         }
                     </div>)
                 break
-            case 3: case 4: case 5: case 6:
+            case 4: case 5: case 6: case 7:
                 render.push (
                     <div className='flex row start' style={{width: '100%'}} key={`wrapper-b-${ind}-${formElements[ind].question.split(' ').join()}`}>
                         <div className='flex row center' style={{width: '50%'}}>
