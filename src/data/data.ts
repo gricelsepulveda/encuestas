@@ -8,7 +8,8 @@ export const defaultAnswers:Answer[] = [
     { id:5, answer:[], validate:false },
     { id:6, answer:[], validate:false },
     { id:8, answer:[], validate:false},
-    { id:9, answer:[], validate:false}
+    { id:9, answer:[], validate:false},
+    { id:10, answer:[], validate:false}
 ]
 
 export const pollData:OptionsData[] = [
@@ -92,9 +93,15 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
+        question:'Mi correo para entrar al sorteo:', error:false, errorMessage:'Sin tu correo no te podemos agregar al sorteo',
+        options: [
+            { type:'textarea', name:'email', id:10, disabled:false, placeholder:'', value:'', img:'', label:'' }
+        ]
+    },
+    {
         question:'¡Muchas gracias por tu tiempo! Pronto daremos a conocer al ganador de los vinitos, ¡atentos al correo!', error:false, errorMessage:'',
         options: [
-            { type:'none', name:'', id:10, disabled:false, placeholder:'', value:'', img:'', label:'' }
+            { type:'none', name:'', id:11, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]
     }
 ]

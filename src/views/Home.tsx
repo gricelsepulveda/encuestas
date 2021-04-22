@@ -25,10 +25,12 @@ const Home = () => {
     const handlePage = () => {
         const nextPage:number = page + 1
         const maxPage:number = formElements.length
+        if (page == 10){
+            sendAnswers() 
+        }
         if (nextPage <= maxPage){
             setPage(nextPage)
         } else {
-            sendAnswers()
             location.replace('https://www.hellowine.cl')
         }
     }
@@ -72,7 +74,7 @@ const Home = () => {
         let render:any[] = [<p>{formElements[ind].question}</p>]
 
         switch (ind) {
-            case 0: case 1: case 2: case 7: case 8:
+            case 0: case 1: case 2: case 7: case 8: case 9:
                 render.push (
                     <div className='flex col start' style={{width: '100%'}}  key={`wrapper-a-${ind}-${formElements[ind].question.split(' ').join()}`}>
                         {
@@ -108,7 +110,7 @@ const Home = () => {
     }
 
     const sendAnswers = () => {
-        fetch('https://localhost.cl:1337/poll-user-personas', {
+        fetch('https://encuesta.hellowine.cl:1337/poll-user-personas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -118,8 +120,8 @@ const Home = () => {
             }),
         })
         .then(response => response.json())
-        .then(data => console.log(data));
-
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
     }
 
     useEffect(() => {
