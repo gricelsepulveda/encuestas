@@ -112,7 +112,7 @@ const Home = () => {
 
     const sendAnswers = () => {
         console.log('pase por fetch')
-        fetch('https://encuesta.hellowine.cl:1337/poll-user-personas', {
+        fetch('https://encuesta.hellowine.cl:80/poll-user-personas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
