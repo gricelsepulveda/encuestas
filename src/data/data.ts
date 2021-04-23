@@ -103,7 +103,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Por favor déjanos tu corre:', error:false, errorMessage:'Asi te podremos contactar en caso de que seas el ganador',
+        question:'Por favor déjanos tu correo:', error:false, errorMessage:'Asi te podremos contactar en caso de que seas el ganador',
         options: [
             { type:'textarea', name:'email', id:11, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]
