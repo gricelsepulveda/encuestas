@@ -15,7 +15,7 @@ export const defaultAnswers:Answer[] = [
 
 export const pollData:OptionsData[] = [
     {
-        question:'Mi edad es:', error:false, errorMessage:'Es necesario indicar tu edad',
+        question:'Mi edad es:', error:false, errorMessage:'Escoge una alternativa',
         options: [
             { type:'radio', name:'age', id:1, disabled:false, placeholder:'', value:'25', img:'', label:'25 años o menos' },
             { type:'radio', name:'age', id:1, disabled:false, placeholder:'', value:'26', img:'', label:'Entre 26 y 35 años' },
@@ -103,7 +103,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:' Déjanos tu correo para contactarte en caso de que seas el/la ganador/a:', error:false, errorMessage:'(Sin tu correo no te podemos incluir)',
+        question:'Por favor déjanos tu corre:', error:false, errorMessage:'Asi te podremos contactar en caso de que seas el ganador',
         options: [
             { type:'textarea', name:'email', id:11, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]
