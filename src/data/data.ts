@@ -15,7 +15,7 @@ export const defaultAnswers:Answer[] = [
 
 export const pollData:OptionsData[] = [
     {
-        question:'Mi edad es:', error:false, errorMessage:'Escoge una alternativa',
+        question:'Mi edad es:', error:false, errorMessage:'Debes elegir una',
         options: [
             { type:'radio', name:'age', id:1, disabled:false, placeholder:'', value:'25', img:'', label:'25 años o menos' },
             { type:'radio', name:'age', id:1, disabled:false, placeholder:'', value:'26', img:'', label:'Entre 26 y 35 años' },
@@ -24,7 +24,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Mi genero es:', error:false, errorMessage:'Escoge una alternativa',
+        question:'Mi genero es:', error:false, errorMessage:'Debes elegir una',
         options: [
             { type:'radio', name:'gender', id:2, disabled:false, placeholder:'', value:'f', img:'', label:'Femenino' },
             { type:'radio', name:'gender', id:2, disabled:false, placeholder:'', value:'m', img:'', label:'Masculino' },
@@ -84,7 +84,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Uso frecuentemente:', error:false, errorMessage:'(Puedes elegir más de una)',
+        question:'Uso frecuentemente:', error:false, errorMessage:'Puedes elegir mas de una',
         options: [
             { type:'checkbox', name:'webapps', id:9, disabled:false, placeholder:'', value:'fb', img:'', label:'Facebook' },
             { type:'checkbox', name:'webapps', id:9, disabled:false, placeholder:'', value:'tw', img:'', label:'Twitter' },
@@ -97,7 +97,7 @@ export const pollData:OptionsData[] = [
         ]
     },
     {
-        question:'Para mi cumpleaños me gustaría recibir:', error:false, errorMessage:'(Lo primero que se te viene a la cabeza)',
+        question:'Para mi cumpleaños me gustaría recibir:', error:false, errorMessage:'Lo primero que se te viene a la cabeza',
         options: [
             { type:'textarea', name:'birthdaygift', id:10, disabled:false, placeholder:'', value:'', img:'', label:'' }
         ]
