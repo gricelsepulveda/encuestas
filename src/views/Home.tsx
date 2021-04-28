@@ -1,5 +1,5 @@
 //Modules
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 //Components
 import Button from '../components/Button/Button'
 //Types
@@ -11,120 +11,36 @@ import '../styles/home.scss'
 
 const Home = () => {
     const [formElements] = useState<OptionsData[]>(pollData)
-    const [page, setPage] = useState<number>(1)
-    const [data, setData] = useState<Answer[]>(defaultAnswers)
-    const element = useRef<null | any>(null)
-
-    const checkAnswer = () => {
-        const currentPage:number = page
-        let checker:boolean = false
-        data[currentPage - 1] != undefined ? checker = data[currentPage - 1].validate : checker = false
-        return checker
-    }
+    const [page] = useState<number>(1)
+    const [data] = useState<Answer[]>(defaultAnswers)
 
     const handlePage = () => {
-        const nextPage:number = page + 1
-        const maxPage:number = formElements.length
-        if (page == 11){
-            sendAnswers() 
-        }
-        if (nextPage <= maxPage){
-            setPage(nextPage)
-        } else {
-            location.replace('https://www.hellowine.cl')
-        }
-    }
-
-    const recordAnswer = (oldData:Answer[], newData:Answer, idIndex:number) => {
-        let updatedData:Answer[] = [... oldData.filter(oldD => oldD.id != idIndex)]
-        updatedData.push(newData)
-        updatedData = updatedData.sort(function(a, b){return a.id - b.id});
-        return updatedData
-    }
-
-    const handleChange = (idQ: number, name:string, value:string, type: string) => {
-        let elVal = element.current != null ? element.current.value : ''
-        let val:Answer
-        const setVals = () => {
-            let checkExists = data[idQ - 1].answer.filter(x => x == value) 
-            let result:any[] = idQ != 8 ? [name, type != 'textarea' ? value : elVal] : checkExists.length > 0 ? data[idQ - 1].answer.filter(x => x != value) : [...data[idQ - 1].answer, value]
-            return result
-        }
-        val = {
-            id: idQ,
-            answer: setVals(),
-            validate: (type != 'textarea' ? value : elVal).length > 0 ? true : false
-        }
-        setData(recordAnswer(data, val, idQ))
+        location.replace('https://www.hellowine.cl')
     }
 
     const renderFormElement = (control:string, info:OptionsData, index: number) => {
         let toRender:React.ReactFragment
         const prefix = info.options[index]
-        control != 'textarea' ? toRender = ( <div className='flex row start' style={{width: '100%'}}  key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`}>
-                            { prefix.img != '' ? <div className='img' style={{backgroundImage: `url("${prefix.img}")`}}/> : null }
-                            <input 
-                                type={prefix.type} name={prefix.name} id={`${prefix.id}`} value={prefix.value} placeholder={prefix.placeholder} disabled={prefix.disabled}
-                                onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>
+        return toRender = ( <div className='flex row start' style={{width: '100%'}}  key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`}>
                             {prefix.label != '' ? <label>{prefix.label}</label> : null }</div>)
-        : toRender = ( <textarea rows={4} style={{width: '100%'}}  ref={element} key={`formElement-${prefix.value}-${index}-${info.question.split(' ').join()}`} name={prefix.name} id={`${prefix.id}`} placeholder={prefix.placeholder} disabled={prefix.disabled} onChange={() => handleChange(prefix.id, prefix.name, prefix.value, prefix.type)}/>)
-        return toRender
     }
 
     const renderQuestion  = (ind: number) => {
         let render:any[] = [<p>{formElements[ind].question}</p>,<span className='prevent-errors'>{page < formElements.length ? data[page - 1].validate ? '' : formElements[page - 1].errorMessage : ''}</span>]
 
         switch (ind) {
-            case 0: case 1: case 2: case 3: case 8: case 9: case 10:
+            case 0:
                 render.push (
                     <div className='flex col start' style={{width: '100%'}}  key={`wrapper-a-${ind}-${formElements[ind].question.split(' ').join()}`}>
                         {
-                            formElements[ind].options.map((formEl, index) => ind == 3 || ind == 8 ? 
-                                <div className="flex row center" style={{width: '100%'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>{ renderFormElement(formEl.type, formElements[ind], index) }</div> 
-                                : renderFormElement(formEl.type, formElements[ind], index))
+                            formElements[ind].options.map((formEl, index) => renderFormElement(formEl.type, formElements[ind], index))
                         }
-                    </div>)
-                break
-            case 4: case 5: case 6: case 7:
-                render.push (
-                    <div className='flex row start' style={{width: '100%'}} key={`wrapper-b-${ind}-${formElements[ind].question.split(' ').join()}`}>
-                        <div className='flex row center' style={{width: '50%'}}>
-                            {
-                                formElements[ind].options.map((formEl, index) => index < 2  ? 
-                                    <div className='flex col center' style={{margin: '10px'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>
-                                        { renderFormElement(formEl.type, formElements[ind], index)}
-                                    </div> : '')
-                            }
-                        </div>
-                        <div className='flex row center' style={{width: '50%'}} key={`wrapper-c-${ind}-${formElements[ind].question.split(' ').join()}`}>
-                            {
-                                formElements[ind].options.map((formEl, index) => index >= 2 ? 
-                                    <div className='flex col center' style={{margin: '10px'}}  key={`${formEl.value}-${ind}-${index}-${formElements[ind].question.split(' ').join()}`}>
-                                        { renderFormElement(formEl.type, formElements[ind], index) }
-                                    </div> : '')
-                            }
-                        </div>
                     </div>)
                 break
         }
         return render
     }
 
-    const sendAnswers = () => {
-        console.log('pase por fetch')
-        fetch('https://encuesta.hellowine.cl:443/poll-user-personas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                answer: data
-            }),
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error))
-    }
 
     useEffect(() => {
     }, [data])
@@ -150,7 +66,7 @@ const Home = () => {
                     </div> : null
                 )
             }
-            <Button icon='' disabled={page < formElements.length ? !checkAnswer() : false} name='edad' value={`${page == formElements.length ? 'finalizar' : 'siguiente'}`} color='color-2' action={handlePage}/>
+            <Button icon='' disabled={false} name='edad' value={`${'ir a hellowine.cl'}`} color='color-2' action={handlePage}/>
         </div>
     )
 }
